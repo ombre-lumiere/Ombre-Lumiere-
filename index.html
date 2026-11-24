@@ -29,6 +29,7 @@ li button{width:auto;margin:0;padding:4px 10px;background:transparent;color:var(
 .err{color:#d92d20;font-size:.85rem;margin:10px 0 0}
 .btn2{display:block;text-align:center;padding:14px;border:1px solid var(--bd);border-radius:12px;color:var(--tx);text-decoration:none;font-weight:600}
 .seg{display:flex;gap:3px;background:var(--bg);border:1px solid var(--bd);border-radius:12px;padding:3px}.seg button{flex:1;width:auto;margin:0;padding:10px;background:transparent;color:var(--mu);font-weight:600;border-radius:9px}.seg button.on{background:var(--ac);color:#111}
+.ck{width:44px;height:44px;flex:none;padding:0;margin:0;border-radius:50%;background:var(--bd);color:var(--mu);display:flex;align-items:center;justify-content:center}.ck.on{background:var(--ac);color:#111}
 [hidden]{display:none!important}
 .wa{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.3)}
 </style></head><body>
@@ -51,9 +52,10 @@ li button{width:auto;margin:0;padding:4px 10px;background:transparent;color:var(
 <section id="s2" class="card" hidden>
 <h2>Votre projet</h2>
 <label>Dimensions d'une fenêtre (cm)</label>
-<div class="row"><input id="wl" type="number" inputmode="decimal" min="1" placeholder="Largeur"><input id="wh" type="number" inputmode="decimal" min="1" placeholder="Hauteur"><input id="wn" type="number" inputmode="numeric" min="1" value="1" placeholder="Qté" aria-label="Quantité"></div>
-<button class="sec" id="add" type="button">Ajouter une autre fenêtre</button>
 <ul id="wlist"></ul>
+<div class="row" style="margin-top:10px;align-items:center"><input id="wl" type="number" inputmode="decimal" min="1" placeholder="Largeur"><input id="wh" type="number" inputmode="decimal" min="1" placeholder="Hauteur"><input id="wn" type="number" inputmode="numeric" min="1" value="1" placeholder="Qté" aria-label="Quantité"><button class="ck" id="add" type="button" aria-label="Valider cette fenêtre"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></button></div>
+<div class="note" style="margin-top:6px">Appuyez sur la coche pour ajouter une autre fenêtre.</div>
+
 <label for="h">Hauteur des vitres</label><select id="h"></select>
 <div class="note" style="margin-top:4px">Hauteur de la vitre la plus haute, depuis le sol.</div>
 <label for="d">Distance</label><select id="d"></select>
@@ -67,17 +69,17 @@ li button{width:auto;margin:0;padding:4px 10px;background:transparent;color:var(
 <button class="lnk" id="back" type="button">Retour</button>
 </section>
 
-<section id="ok" class="card" hidden style="text-align:center"><strong>Merci pour votre confiance</strong><p style="margin:8px 0 0">Pour finaliser votre demande, envoyez le message pré-rempli depuis votre messagerie.</p><p class="note" style="margin-top:10px">Notre équipe étudie votre projet et vous adresse un devis personnalisé sous 48 h ouvrées.</p></section>
+<section id="ok" class="card" hidden style="text-align:center"><strong>Merci pour votre confiance</strong><p id="okt" style="margin:8px 0 0">Votre demande a bien été envoyée.</p><p class="note" style="margin-top:10px">Notre équipe étudie votre projet et vous adresse un devis personnalisé sous 48 h ouvrées.</p></section>
 </main>
 <a class="wa" id="wa" href="#" target="_blank" rel="noopener" aria-label="Nous écrire sur WhatsApp"><svg viewBox="0 0 24 24" width="32" height="32" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
 <script>
 // À PERSONNALISER
-var EMAIL="votre@email.com",TVA=20,PRIX=80,MIN=80,FOURCHETTE=15,WHATSAPP="33600000000";
+var EMAIL="ombre8lumiere@proton.me",TVA=20,PRIX=100,MIN=120,FOURCHETTE=15,WHATSAPP="33772093233",KEY="5162477b-d3f9-48ac-a5a3-2ba9657f6839";
 // Tarif professionnel dégressif selon la surface totale (valeurs d'exemple) : min = surface en m², p = prix HT/m²
-var PRO=[{min:50,p:65},{min:20,p:72}];
+var PRO=[{min:50,p:80},{min:20,p:90}];
 // Paliers (valeurs d'exemple) : pct = supplément en %, fix = forfait en € HT, q = sur devis
 var HAUT=[{n:"Moins de 2,5 m",pct:0},{n:"2,5 à 4 m",pct:20},{n:"4 à 6 m",pct:35},{n:"Plus de 6 m",q:1}];
-var DIST=[{n:"Moins de 30 km",fix:0},{n:"30 à 50 km",fix:30},{n:"50 à 80 km",fix:60},{n:"Plus de 80 km",q:1}];
+var DIST=[{n:"Moins de 30 km",fix:0},{n:"30 à 50 km",fix:40},{n:"50 à 80 km",fix:70},{n:"Plus de 80 km",q:1}];
 var $=function(i){return document.getElementById(i)},W=[];
 $("wa").href="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent("Bonjour Ombre & Lumière, je souhaite un devis pour la pose de films sur mes fenêtres.");
 function f(n){return n.toLocaleString("fr-FR")}
@@ -87,7 +89,7 @@ function lab(o){return o.n+(o.q?" (sur devis)":o.pct?" (+"+o.pct+" %)":o.fix?" (
 function fill(id,A){A.forEach(function(o,i){var e=document.createElement("option");e.value=i;e.textContent=lab(o);$(id).appendChild(e)});$(id).onchange=calc}
 fill("h",HAUT);fill("d",DIST);
 function rg(r){var F=FOURCHETTE/100;return[r,Math.max(r,Math.round(r*(1+F)/5)*5)]}
-function calc(){var a=area(),H=HAUT[$("h").value],D=DIST[$("d").value],w=px(a)*a*(1+(H.pct||0)/100),t=a?Math.max(MIN,w)+(D.fix||0):0,r=Math.round(t),q=H.q||D.q;$("surf").textContent=(Math.round(a*100)/100).toString().replace(".",",")+" m²"+(TYPE=="Professionnel"&&a?" · "+px(a)+" € HT/m²":"");$("mn").hidden=!(a&&w<MIN&&!q);$("mn").textContent="Minimum de facturation : "+MIN+" € HT";if(a&&q){$("tot").textContent="Sur devis";$("ttc").textContent="";return -1}if(!a){$("tot").textContent="0 € HT";$("ttc").textContent="";return 0}var g=rg(r),T=1+TVA/100;$("tot").textContent=f(g[0])+" – "+f(g[1])+" € HT";$("ttc").textContent=TYPE=="Professionnel"?"":"soit "+f(Math.round(g[0]*T))+" – "+f(Math.round(g[1]*T))+" € TTC";return r}
+function calc(){$("add").className=draft()?"ck on":"ck";var a=area(),H=HAUT[$("h").value],D=DIST[$("d").value],w=px(a)*a*(1+(H.pct||0)/100),t=a?Math.max(MIN,w)+(D.fix||0):0,r=Math.round(t),q=H.q||D.q;$("surf").textContent=(Math.round(a*100)/100).toString().replace(".",",")+" m²"+(TYPE=="Professionnel"&&a?" · "+px(a)+" € HT/m²":"");$("mn").hidden=!(a&&w<MIN&&!q);$("mn").textContent="Minimum de facturation : "+MIN+" € HT";if(a&&q){$("tot").textContent="Sur devis";$("ttc").textContent="";return -1}if(!a){$("tot").textContent="0 € HT";$("ttc").textContent="";return 0}var g=rg(r),T=1+TVA/100;$("tot").textContent=f(g[0])+" – "+f(g[1])+" € HT";$("ttc").textContent=TYPE=="Professionnel"?"":"soit "+f(Math.round(g[0]*T))+" – "+f(Math.round(g[1]*T))+" € TTC";return r}
 function render(){var ul=$("wlist");ul.innerHTML="";W.forEach(function(w,i){var li=document.createElement("li"),s=document.createElement("span"),b=document.createElement("button");s.textContent=w.n+" x "+w.l+" x "+w.h+" cm";b.type="button";b.textContent="Retirer";b.onclick=function(){W.splice(i,1);render()};li.appendChild(s);li.appendChild(b);ul.appendChild(li)});calc()}
 function addW(){var l=parseFloat($("wl").value),h=parseFloat($("wh").value),n=Math.max(1,parseInt($("wn").value)||1);if(!(l>0)||!(h>0))return false;W.push({l:l,h:h,n:n});$("wl").value="";$("wh").value="";$("wn").value="1";render();return true}
 function go(k){$("s1").hidden=k!=1;$("s2").hidden=k!=2;$("b2").className=k==2?"on":"";window.scrollTo(0,0)}
@@ -100,7 +102,8 @@ $("next").onclick=function(){var ok=$("nom").value.trim()&&$("adr").value.trim()
 $("back").onclick=function(){go(1)};
 $("send").onclick=function(){addW();if(!W.length){$("e2").hidden=false;return}$("e2").hidden=true;var r=calc(),H=HAUT[$("h").value],D=DIST[$("d").value];
 var body="Demande de devis gratuit\n\nNom : "+$("nom").value.trim()+"\nTéléphone : "+$("tel").value.trim()+"\nE-mail : "+$("mail").value.trim()+"\nAdresse : "+$("adr").value.trim()+", "+$("cp").value.trim()+" "+$("ville").value.trim()+"\nClient : "+TYPE+(TYPE=="Professionnel"&&$("entn").value.trim()?" - "+$("entn").value.trim():"")+"\nLogement : "+$("log").value+"\n\nFenêtres : "+W.map(function(w){return w.n+" x "+w.l+" x "+w.h+" cm"}).join(" ; ")+"\nSurface : "+$("surf").textContent+"\nHauteur : "+H.n+"\nDistance : "+D.n+"\nEstimation : "+(r<0?"sur devis":f(rg(r)[0])+" - "+f(rg(r)[1])+" € HT"+(TYPE=="Professionnel"?"":" ("+f(Math.round(rg(r)[0]*(1+TVA/100)))+" - "+f(Math.round(rg(r)[1]*(1+TVA/100)))+" € TTC)"));
-$("s2").hidden=true;$("ok").hidden=false;$("b2").className="on";window.location.href="mailto:"+EMAIL+"?subject="+encodeURIComponent("Demande de devis - "+$("nom").value.trim())+"&body="+encodeURIComponent(body)};
+var sub="Demande de devis - "+$("nom").value.trim(),btn=$("send"),fin=function(m){$("s2").hidden=true;$("ok").hidden=false;$("b2").className="on";btn.disabled=false;btn.textContent="Envoyer ma demande";if(m)$("okt").textContent=m;window.scrollTo(0,0)},d={access_key:KEY,subject:sub,from_name:"Simulateur Ombre & Lumière",name:$("nom").value.trim(),message:body};if($("mail").value.trim())d.email=$("mail").value.trim();btn.disabled=true;btn.textContent="Envoi en cours…";
+fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(d)}).then(function(x){return x.json()}).then(function(j){if(!j.success)throw 0;fin()}).catch(function(){window.location.href="mailto:"+EMAIL+"?subject="+encodeURIComponent(sub)+"&body="+encodeURIComponent(body);fin("Votre demande est presque envoyée : il ne reste qu'à valider le message qui vient de s'ouvrir dans votre messagerie.")})};
 calc();
 </script>
 </body></html>
